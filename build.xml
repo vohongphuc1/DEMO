@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Cấu hình cho project EmployeeManagement  -->
+<project name="EmployeeManagement" default="build" basedir=".">
+<!--  Định nghĩa các thuộc tính cho các thư mục  -->
+<property name="src.dir" value="src/employeemanagement"/>
+<!--  Thư mục chứa mã nguồn  -->
+<property name="build.dir" value="build"/>
+<!--  Thư mục chứa file biên dịch  -->
+<property name="dist.dir" value="dist"/>
+<!--  Thư mục chứa file JAR sau khi build  -->
+<!--  Target 'clean' để xóa thư mục build và dist  -->
+<target name="clean">
+<delete dir="${build.dir}"/>
+<!--  Xóa thư mục build  -->
+<delete dir="${dist.dir}"/>
+<!--  Xóa thư mục dist  -->
+</target>
+<!--  Target 'init' sẽ tạo các thư mục build và dist nếu chưa có  -->
+<target name="init" depends="clean">
+<mkdir dir="${build.dir}"/>
+<!--  Tạo thư mục build  -->
+<mkdir dir="${dist.dir}"/>
+<!--  Tạo thư mục dist  -->
+</target>
+<!--  Target 'compile' sẽ biên dịch mã nguồn trong thư mục src và lưu kết quả vào thư mục build  -->
+<target name="compile" depends="init">
+<javac srcdir="${src.dir}" destdir="${build.dir}"/>
+<!--  Biên dịch mã nguồn  -->
+</target>
+<!--  Target 'build' sẽ tạo file JAR từ thư mục build và đặt vào thư mục dist  -->
+<target name="build" depends="compile">
+<jar destfile="${dist.dir}/EmployeeManagement.jar" basedir="${build.dir}">
+<manifest>
+<attribute name="Main-Class" value="employeemanagement.Employee"/>
+</manifest>
+</jar>
+</target>
+</project>
